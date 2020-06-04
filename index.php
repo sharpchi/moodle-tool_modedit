@@ -36,7 +36,7 @@ $PAGE->set_url('/admin/tool/modedit.php', ['id' => $courseid]);
 $PAGE->set_pagelayout('course');
 $courseformat = course_get_format($course)->get_format();
 
-$PAGE->set_pagetype('course-view-' . $courseformat);
+$PAGE->set_pagetype('activity-edit-list');
 $PAGE->set_title(get_string('editactivities', 'tool_modedit'));
 $PAGE->set_heading($course->fullname);
 echo $OUTPUT->header();

@@ -23,7 +23,6 @@
 
 namespace tool_modedit\output;
 
-use cached_cm_info;
 use moodle_url;
 use renderable;
 use stdClass;
@@ -34,6 +33,7 @@ defined('MOODLE_INTERNAL') || die();
 class modlist implements renderable, templatable {
 
     private $data;
+
     public function __construct($courseid) {
         $this->data = $this->get_activities($courseid);
     }
@@ -48,14 +48,13 @@ class modlist implements renderable, templatable {
      * Gets an array of activities grouped by section.
      *
      * @param integer $courseid
-     * @return array Multidimential array of section and mods in sequence.
+     * @return array Multidimential array of activites grouped by section.
      */
     function get_activities(int $courseid) : array {
-        global $CFG, $DB;
+        global $DB;
         $mods = [];
-        $rawmods = get_course_mods($courseid);
-        $sections = $DB->get_records('course_sections', ['course' => $courseid], 'section ASC');
 
+        $sections = $DB->get_records('course_sections', ['course' => $courseid], 'section ASC');
         foreach ($sections as $key => $section) {
             $s = new stdClass();
             $s->name = $section->name ?? get_string('section') . ' ' . $section->section;
@@ -64,13 +63,14 @@ class modlist implements renderable, templatable {
             $s->activities = [];
 
             $mods[$key] = $s;
-            $sequence = explode(",", $section->sequence);
-            foreach ($sequence as $seq) {
-                $modinfo = get_fast_modinfo($courseid)->cms[$seq];
+            
+            $activities = explode(",", $section->sequence);
+            foreach ($activities as $activity) {
+                $modinfo = get_fast_modinfo($courseid)->cms[$activity];
                 $editurl = new moodle_url('/course/modedit.php', ['update' => $modinfo->id]);
                 $mod = new stdClass();
                 $mod->cm        = $modinfo->id;
-                $mod->editurl = $editurl->out(false);
+                $mod->editurl   = $editurl->out(false);
                 $mod->icon      = $modinfo->get_icon_url();
                 $mod->id        = $modinfo->instance;
                 $mod->mod       = $modinfo->modname;
