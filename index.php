@@ -22,7 +22,6 @@
 */
 
 require('../../../config.php');
-require_once($CFG->dirroot . '/course/format/lib.php');
 
 $courseid = required_param('id', PARAM_INT);
 $course = $DB->get_record('course', ['id' => $courseid]);
@@ -32,13 +31,12 @@ require_login($course);
 require_capability('moodle/course:manageactivities', $coursecontext);
 
 $PAGE->set_context($coursecontext);
-$PAGE->set_url('/admin/tool/modedit.php', ['id' => $courseid]);
+$PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('course');
-$courseformat = course_get_format($course)->get_format();
-
 $PAGE->set_pagetype('activity-edit-list');
 $PAGE->set_title(get_string('editactivities', 'tool_modedit'));
-$PAGE->set_heading($course->fullname);
+$PAGE->set_url('/admin/tool/modedit.php', ['id' => $courseid]);
+
 echo $OUTPUT->header();
 
 $activities = new \tool_modedit\output\modlist($courseid);
