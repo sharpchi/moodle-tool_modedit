@@ -63,24 +63,29 @@ class modlist implements renderable, templatable {
             $s->activities = [];
 
             $mods[$key] = $s;
-            
+
             $activities = explode(",", $section->sequence);
+            $modinfo = get_fast_modinfo($courseid);
             foreach ($activities as $activity) {
-                $modinfo = get_fast_modinfo($courseid)->cms[$activity];
-                if (!$modinfo) {
-                    error_log($activity);
+                if (!isset($modinfo->cms[$activity])) {
                     continue;
                 }
-                $editurl = new moodle_url('/course/modedit.php', ['update' => $modinfo->id]);
+                $cm = $modinfo->cms[$activity];
+                if ($cm->deletioninprogress) {
+                    continue;
+                }
+
+                $editurl = new moodle_url('/course/modedit.php', ['update' => $cm->id]);
                 $mod = new stdClass();
-                $mod->cm        = $modinfo->id;
+                $mod->cm        = $cm->id;
                 $mod->editurl   = $editurl->out(false);
-                $mod->icon      = $modinfo->get_icon_url();
-                $mod->id        = $modinfo->instance;
-                $mod->mod       = $modinfo->modname;
-                $mod->module    = $modinfo->module;
-                $mod->name      = $modinfo->name;
+                $mod->icon      = $cm->get_icon_url();
+                $mod->id        = $cm->instance;
+                $mod->mod       = $cm->modname;
+                $mod->module    = $cm->module;
+                $mod->name      = $cm->name;
                 $mod->section   = $section->section;
+
                 $mods[$key]->activities[] = $mod;
             }
         }
