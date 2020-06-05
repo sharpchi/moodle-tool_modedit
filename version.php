@@ -26,3 +26,5 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->version   = 2020060401;
 $plugin->requires  = 2019111800;
 $plugin->component = 'tool_modedit';
+$plugin->release   = 1.0;
+$plugin->maturity  = MATURITY_RC;
