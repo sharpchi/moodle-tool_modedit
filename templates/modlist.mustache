@@ -3,11 +3,12 @@
 <ul class="list-unstyled">
     {{#sections}}
     <li class="mb-3">
-        <h3><a href="{{{sectioneditlink}}}" title="{{#str}}edit{{/str}} {{name}}">{{name}}</a></h3>
+        <h3><a href="{{{sectioneditlink}}}" title="{{#str}}edit, tool_modedit, {{name}}{{/str}}">{{name}}</a></h3>
         <ul class="list-unstyled">
             {{#activities}}
                 <li class="pl-3 mb-1"><img src="{{{icon}}}" class="iconlarge activityicon" role="presentation" />
-                    <a href="{{{editurl}}}" title="{{#str}}edit{{/str}} {{name}}">{{name}}</a>
+                    <a href="{{{editurl}}}" title="{{#str}}edit, tool_modedit, {{name}}{{/str}}">{{name}}</a> 
+                    | {{#edit}}{{> core/action_link}}{{/edit}} | {{#delete}}{{> core/action_link}}{{/delete}}
                 </li>
             {{/activities}}
         </ul>

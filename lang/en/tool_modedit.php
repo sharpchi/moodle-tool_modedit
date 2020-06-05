@@ -23,6 +23,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['delete'] = 'Delete {$a}';
+$string['deleteconfirm'] = 'Delete {$a}?';
+
+$string['edit'] = 'Edit {$a}';
 $string['editactivities'] = 'Edit activities';
 $string['editactivities_desc'] = 'This page contains direct links to your activities\' edit pages. This is useful if you have 
 something on your page that is breaking the layout, and perhaps making the edit links unusable.';

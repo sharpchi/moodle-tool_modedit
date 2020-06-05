@@ -51,7 +51,7 @@ class modlist implements renderable, templatable {
      * @return array Multidimential array of activites grouped by section.
      */
     function get_activities(int $courseid) : array {
-        global $DB;
+        global $DB, $OUTPUT;
         $mods = [];
 
         $sections = $DB->get_records('course_sections', ['course' => $courseid], 'section ASC');
@@ -75,17 +75,29 @@ class modlist implements renderable, templatable {
                     continue;
                 }
 
-                $editurl = new moodle_url('/course/modedit.php', ['update' => $cm->id]);
+                
+                
                 $mod = new stdClass();
                 $mod->cm        = $cm->id;
-                $mod->editurl   = $editurl->out(false);
+                
                 $mod->icon      = $cm->get_icon_url();
                 $mod->id        = $cm->instance;
                 $mod->mod       = $cm->modname;
                 $mod->module    = $cm->module;
                 $mod->name      = $cm->name;
                 $mod->section   = $section->section;
+                
+                $editurl = new moodle_url('/course/modedit.php', ['update' => $cm->id]);
+                $editpix = new \pix_icon('t/edit', get_string('edit', 'tool_modedit', $mod->name));
+                $editaction = new \action_link($editurl, get_string('edit'), null, null, $editpix);
+                $mod->edit = $editaction->export_for_template($OUTPUT);
+                $mod->editurl = $editurl;
 
+                $deleteurl = new moodle_url('/course/mod.php', ['delete' => $cm->id, 'sesskey' => sesskey(), 'confirm' => 1]);
+                $deleteaction = new \confirm_action(get_string('deleteconfirm', 'tool_modedit', $mod->name));
+                $deletepix = new \pix_icon('t/delete', get_string('delete', 'tool_modedit', $mod->name));
+                $actionlink = new \action_link($deleteurl, get_string('delete'), $deleteaction, null, $deletepix);
+                $mod->delete    = $actionlink->export_for_template($OUTPUT);
                 $mods[$key]->activities[] = $mod;
             }
         }
