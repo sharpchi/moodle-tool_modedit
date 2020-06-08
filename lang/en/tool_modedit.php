@@ -15,11 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Language file for modedit tool.
+ *
  * @package   tool_modedit
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
- * @copyright 2020 University of Chichester {@link www.chi.ac.uk}
+ * @copyright 2020 University of Chichester {@link https://www.chi.ac.uk}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -28,8 +30,8 @@ $string['deleteconfirm'] = 'Delete {$a}?';
 
 $string['edit'] = 'Edit {$a}';
 $string['editactivities'] = 'Edit activities';
-$string['editactivities_desc'] = 'This page contains direct links to your activities\' edit pages. This is useful if you have 
-something on your page that is breaking the layout, and perhaps making the edit links unusable.';
+$string['editactivities_desc'] = 'This page contains direct links to your activities\' edit pages. This is useful if you have ' .
+    'something on your page that is breaking the layout, and perhaps making the edit links unusable.';
 
 $string['pluginname'] = 'modedit';
 $string['privacy:metadata'] = 'The tool_modedit plugin does not store any personal data.';

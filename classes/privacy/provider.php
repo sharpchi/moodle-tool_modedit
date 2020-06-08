@@ -15,16 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Null provider class for modedit.
+ *
  * @package   tool_modedit
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
- * @copyright 2020 University of Chichester {@link www.chi.ac.uk}
+ * @copyright 2020 University of Chichester {@link https://www.chi.ac.uk}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ */
 
 namespace tool_modedit\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Provider class
+ */
 class provider implements \core_privacy\local\metadata\null_provider {
 
     /**
@@ -36,4 +41,4 @@ class provider implements \core_privacy\local\metadata\null_provider {
     public static function get_reason() : string {
         return 'privacy:metadata';
     }
-} 
+}

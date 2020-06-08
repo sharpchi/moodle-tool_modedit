@@ -15,14 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Lib file for modedit.
+ *
  * @package   tool_modedit
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
- * @copyright 2020 University of Chichester {@link www.chi.ac.uk}
+ * @copyright 2020 University of Chichester {@link https://www.chi.ac.uk}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Extends the course menu for this plugin.
+ *
+ * @param navigation_node $navigation The navigatio node to extend.
+ * @param stdClass $course Course object.
+ * @param context $context Context of the course.
+ * @return void
+ */
 function tool_modedit_extend_navigation_course($navigation, $course, $context) {
     if (has_capability('moodle/course:manageactivities', $context)) {
         $url = new moodle_url('/admin/tool/modedit/index.php', array('id' => $course->id));

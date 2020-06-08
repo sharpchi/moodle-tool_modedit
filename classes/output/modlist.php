@@ -15,11 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Activity renderer class.
+ *
  * @package   tool_modedit
  * @author    Mark Sharp <m.sharp@chi.ac.uk>
- * @copyright 2020 University of Chichester {@link www.chi.ac.uk}
+ * @copyright 2020 University of Chichester {@link https://www.chi.ac.uk}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ */
 
 namespace tool_modedit\output;
 
@@ -30,14 +32,33 @@ use templatable;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Renderer class for list of activities.
+ */
 class modlist implements renderable, templatable {
 
+    /**
+     * Data derived from courseid
+     *
+     * @var array
+     */
     private $data;
 
-    public function __construct($courseid) {
+    /**
+     * Constructor for renderer.
+     *
+     * @param int $courseid Course ID
+     */
+    public function __construct(int $courseid) {
         $this->data = $this->get_activities($courseid);
     }
 
+    /**
+     * Creates an object to be used by the template.
+     *
+     * @param \renderer_base $output Base renderer class.
+     * @return object
+     */
     public function export_for_template(\renderer_base $output) {
         $sections = new stdClass();
         $sections->sections = $this->data;
@@ -47,11 +68,11 @@ class modlist implements renderable, templatable {
     /**
      * Gets an array of activities grouped by section.
      *
-     * @param integer $courseid
+     * @param  integer $courseid Courseid
      * @return array Multidimential array of activites grouped by section.
      */
-    function get_activities(int $courseid) : array {
-        global $DB, $OUTPUT;
+    public function get_activities(int $courseid) : array {
+        global $OUTPUT, $DB;
         $mods = [];
 
         $sections = $DB->get_records('course_sections', ['course' => $courseid], 'section ASC');
@@ -75,18 +96,16 @@ class modlist implements renderable, templatable {
                     continue;
                 }
 
-                
-                
                 $mod = new stdClass();
                 $mod->cm        = $cm->id;
-                
+
                 $mod->icon      = $cm->get_icon_url();
                 $mod->id        = $cm->instance;
                 $mod->mod       = $cm->modname;
                 $mod->module    = $cm->module;
                 $mod->name      = $cm->name;
                 $mod->section   = $section->section;
-                
+
                 $editurl = new moodle_url('/course/modedit.php', ['update' => $cm->id]);
                 $editpix = new \pix_icon('t/edit', get_string('edit', 'tool_modedit', $mod->name));
                 $editaction = new \action_link($editurl, get_string('edit'), null, null, $editpix);

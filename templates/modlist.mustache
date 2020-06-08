@@ -1,3 +1,53 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template tool_modedit/modlist
+
+    Lists the activities for the selected course, grouped by section.
+
+    Classes required for JS:
+    * none
+
+    Data attibutes required for JS:
+    * none
+
+    Context variables required for this template:
+    * sections - List of sections for this page
+
+    Example context (json):
+    {
+        "message": "Message",
+        "sections": [
+            { 
+                "sectioneditlink": "course/editsection.php?id=2",
+                "name": "Section name",
+                "activities": [
+                    {
+                        "editurl": "course/modedit.php?update=123",
+                        "icon": "http://example.moodle.com/theme/image.php/boost/label/1591606386/icon",
+                        "name": "Activity name",
+                        "edit": "@core.action_link",
+                        "delete": "@core.action_link"
+                    }
+                ]
+            },
+        ],
+    }
+}}
 <h2>{{#str}}editactivities, tool_modedit{{/str}}</h2>
 <p>{{#str}}editactivities_desc, tool_modedit{{/str}}</p>
 <ul class="list-unstyled">
