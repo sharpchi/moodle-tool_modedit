@@ -29,4 +29,4 @@ $plugin->version   = 2020060402;
 $plugin->requires  = 2019111800;
 $plugin->component = 'tool_modedit';
 $plugin->release   = 1.2;
-$plugin->maturity  = MATURITY_RC;
+$plugin->maturity  = MATURITY_STABLE;

@@ -30,7 +30,6 @@ use renderable;
 use stdClass;
 use templatable;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Renderer class for list of activities.

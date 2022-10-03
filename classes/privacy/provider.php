@@ -25,7 +25,6 @@
 
 namespace tool_modedit\privacy;
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Provider class
