@@ -30,7 +30,7 @@ $course = $DB->get_record('course', ['id' => $courseid]);
 $coursecontext = context_course::instance($courseid);
 
 require_login($course);
-require_capability('moodle/course:manageactivities', $coursecontext);
+require_all_capabilities(['moodle/course:manageactivities', 'tool/modedit:manageactivities'], $coursecontext);
 
 $PAGE->set_context($coursecontext);
 $PAGE->set_heading($course->fullname);

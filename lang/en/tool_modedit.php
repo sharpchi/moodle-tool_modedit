@@ -33,5 +33,7 @@ $string['editactivities'] = 'Edit activities';
 $string['editactivities_desc'] = 'This page contains direct links to your activities\' edit pages. This is useful if you have
     something on your page that is breaking the layout, and perhaps making the edit links unusable.';
 
+$string['modedit:manageactivities'] = 'Manage activities';
+
 $string['pluginname'] = 'modedit';
 $string['privacy:metadata'] = 'The tool_modedit plugin does not store any personal data.';
