@@ -111,11 +111,13 @@ class modlist implements renderable, templatable {
                 $mod->edit = $editaction->export_for_template($OUTPUT);
                 $mod->editurl = $editurl;
 
-                $deleteurl = new moodle_url('/course/mod.php', ['delete' => $cm->id, 'sesskey' => sesskey(), 'confirm' => 1]);
-                $deleteaction = new \confirm_action(get_string('deleteconfirm', 'tool_modedit', $mod->name));
-                $deletepix = new \pix_icon('t/delete', get_string('delete', 'tool_modedit', $mod->name));
-                $actionlink = new \action_link($deleteurl, get_string('delete'), $deleteaction, null, $deletepix);
-                $mod->delete    = $actionlink->export_for_template($OUTPUT);
+                if (has_capability('tool/modedit:deleteactivities', $cm->context)) {
+                    $deleteurl = new moodle_url('/course/mod.php', ['delete' => $cm->id, 'sesskey' => sesskey(), 'confirm' => 1]);
+                    $deleteaction = new \confirm_action(get_string('deleteconfirm', 'tool_modedit', $mod->name));
+                    $deletepix = new \pix_icon('t/delete', get_string('delete', 'tool_modedit', $mod->name));
+                    $actionlink = new \action_link($deleteurl, get_string('delete'), $deleteaction, null, $deletepix);
+                    $mod->delete    = $actionlink->export_for_template($OUTPUT);
+                }
                 $mods[$key]->activities[] = $mod;
             }
         }

@@ -37,4 +37,13 @@ $capabilities = [
             'manager' => CAP_ALLOW,
         ],
     ],
+    'tool/modedit:deleteactivities' => [
+        'riskbitmask' => RISK_XSS,
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+        ],
+    ],
 ];
