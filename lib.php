@@ -34,7 +34,7 @@
  */
 function tool_modedit_extend_navigation_course($navigation, $course, $context) {
     if (has_capability('moodle/course:manageactivities', $context)) {
-        $url = new moodle_url('/admin/tool/modedit/index.php', array('id' => $course->id));
+        $url = new moodle_url('/admin/tool/modedit/index.php', ['id' => $course->id]);
         $settingsnode = navigation_node::create(get_string('editactivities', 'tool_modedit'), $url, navigation_node::TYPE_SETTING,
                 null, null, new pix_icon('t/edit', ''));
         $navigation->add_node($settingsnode);

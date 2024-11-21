@@ -70,7 +70,7 @@ class modlist implements renderable, templatable {
      * @param  int $courseid Courseid
      * @return array Multidimential array of activites grouped by section.
      */
-    public function get_activities(int $courseid) : array {
+    public function get_activities(int $courseid): array {
         global $OUTPUT, $DB;
         $mods = [];
 
