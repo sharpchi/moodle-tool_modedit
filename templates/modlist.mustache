@@ -58,7 +58,7 @@
             {{#activities}}
                 <li class="pl-3 mb-1"><img src="{{{icon}}}" class="iconlarge activityicon" role="presentation" />
                     <a href="{{{editurl}}}" title="{{#str}}edit, tool_modedit, {{name}}{{/str}}">{{name}}</a> 
-                    | {{#edit}}{{> core/action_link}}{{/edit}} | {{#delete}}{{> core/action_link}}{{/delete}}
+                    {{#edit}} {{> core/action_link}}{{/edit}}{{#delete}} {{> core/action_link}}{{/delete}}
                 </li>
             {{/activities}}
         </ul>
